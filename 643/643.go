@@ -7,27 +7,18 @@ func main() {
 }
 
 func findMaxAverage(nums []int, k int) float64 {
-
-	i := 0
-	j := k - 1
-
-	var latest float64 = -797693134862315708145274237
-
-	for j < len(nums) {
-
-		sum := 0
-		for x := i; x <= j; x++ {
-			sum += nums[x]
-		}
-
-		if float64(sum) > latest {
-			latest = float64(sum)
-		}
-		i++
-		j++
+	sum := 0
+	for _, n := range nums[:k] {
+		sum += n
 	}
-
-	return float64(latest) / float64(k)
+	maxsum := sum
+	for i := k; i < len(nums); i++ {
+		sum += nums[i] - nums[i-k]
+		if sum > maxsum {
+			maxsum = sum
+		}
+	}
+	return float64(maxsum) / float64(k)
 }
 
 func findMaxAverage2(nums []int, k int) float64 {
