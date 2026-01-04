@@ -54,3 +54,26 @@ func commonFactors2(a int, b int) int {
 
 	return counter
 }
+
+// 空間複雜度 O(1)
+func commonFactors3(a int, b int) int {
+	m := a
+	if b < a {
+		m = b
+	}
+
+	no_of_factors := 0
+
+	for n := 1; n <= m/2; n++ {
+		if a%n == 0 && b%n == 0 {
+			no_of_factors++
+		}
+	}
+
+	// include min(a, b) if it is a common factor
+	if a%m == 0 && b%m == 0 {
+		no_of_factors++
+	}
+
+	return no_of_factors
+}
