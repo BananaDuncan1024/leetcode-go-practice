@@ -7,6 +7,21 @@ func main() {
 
 }
 
+// O (n^2) 過久
+func maxProfit2(prices []int) int {
+
+	max := 0
+
+	for index, price := range prices {
+		for j := index + 1; j < len(prices); j++ {
+			if prices[j]-price > max {
+				max = prices[j] - price
+			}
+		}
+	}
+	return max
+}
+
 func maxProfit(prices []int) int {
 
 	profit := 0
