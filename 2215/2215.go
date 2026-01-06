@@ -7,6 +7,7 @@ package main
 // Note that the integers in the lists may be returned in any order.
 func main() {
 	findDifference([]int{1, 2, 3}, []int{2, 4, 6})
+	findDifference2([]int{1, 2, 3}, []int{2, 4, 6})
 }
 
 // Time complexity: O(n + m)
@@ -34,4 +35,24 @@ func findDifference(nums1 []int, nums2 []int) [][]int {
 	}
 
 	return [][]int{diff1, diff2}
+}
+
+func findDifference2(nums1 []int, nums2 []int) [][]int {
+	mp := make(map[int]bool)
+	for _, n := range nums1 {
+		mp[n] = true
+	}
+	ans := make([][]int, 2)
+	for _, n := range nums2 {
+		if _, ok := mp[n]; !ok {
+			ans[1] = append(ans[1], n)
+		}
+		mp[n] = false
+	}
+	for k, v := range mp {
+		if v {
+			ans[0] = append(ans[0], k)
+		}
+	}
+	return ans
 }
