@@ -35,5 +35,30 @@ func findUnsortedSubarray(nums []int) int {
 }
 
 func findUnsortedSubarrayTwoPointers(nums []int) int {
-	return 0
+
+	left, right := -1, -2
+
+	if len(nums) < 2 {
+		return 0
+	}
+
+	max, min := nums[0], nums[len(nums)-1]
+
+	for i := 0; i < len(nums); i++ {
+		if nums[i] < max {
+			right = i
+		} else {
+			max = nums[i]
+		}
+	}
+
+	for i := len(nums) - 1; i >= 0; i-- {
+		if nums[i] > min {
+			left = i
+		} else {
+			min = nums[i]
+		}
+	}
+
+	return right - left + 1
 }
